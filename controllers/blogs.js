@@ -2,14 +2,15 @@ const Blog = require('../models/Blog');
 
 module.exports = {
     getLoggedInUserBlogs: async (req,res)=>{
-        console.log(req.user);
+        //console.log(req); //.user
+        
         try{
-            const blogItems = await Blog.find({userId:req.user.id});
-            const blogLikes = await Todo.countDocuments({userId:req.user.id,liked: true});
-            res.render('blogs.ejs', {blogs: blogItems, likes: blogLikes, user: req.user});
+            const userBlogs = await Blog.find({userId:req.user.id});
+            res.render('blogs.ejs', {blogs:userBlogs});
         }catch(err){
             console.log(err);
         };
+        console.log(res)
     },
     getAllBlogs: async (req,res)=>{
         console.log(req.user);
@@ -23,7 +24,7 @@ module.exports = {
     },
     createBlog: async (req, res)=>{
         try{
-            await Blog.create({blog: req.body.blogList, liked: false, userId: req.user.id});
+            await Blog.create({title: req.body.title, body: req.body.body, likes: 0, userId: req.user.id});
             console.log('Blog has been added!');
             res.redirect('/blogs');
         }catch(err){
@@ -33,7 +34,9 @@ module.exports = {
     markLike: async (req, res)=>{
         try{
             await Blog.findOneAndUpdate({_id:req.body.blogIdFromJSFile},{
-                liked: true
+                $set: {
+                    likes:request.body.likesS + 1
+                  }
             });
             console.log('Marked Like');
             res.json('Marked Like');
@@ -44,7 +47,9 @@ module.exports = {
     markUnlike: async (req, res)=>{
         try{
             await Blog.findOneAndUpdate({_id:req.body.blogIdFromJSFile},{
-                liked: false
+                $set: {
+                    likes:request.body.likesS - 1
+                  }
             });
             console.log('Marked Unlike');
             res.json('Marked Unlike');

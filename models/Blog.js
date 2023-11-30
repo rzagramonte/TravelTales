@@ -5,13 +5,13 @@ const BlogSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  blogText: {
+  body: {
     type: String,
     required: true,
   },
-  liked: {
-    type: Boolean,
-    required: false,
+  likes: {
+    type: Number,
+    required: true,
   },
   userId: {
     type: String,
