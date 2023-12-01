@@ -9,27 +9,37 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>My Blogs</h1>
-    <ul>
-    <% blogs.forEach( el => { %>
-            <li class='blogItem' data-id='<%=el._id%>'>
-                <h2><%= el.title %></h2>
-                <p><%= el.body %></p>
-                <span><%= el.likes %></span>
-                <span class='fa fa-thumbs-up'></span>
-                <span class='fa fa-trash del'></span>
-            </li>
-    <% }) %>    
-    </ul>
-
-    <form action="/blogs/createBlog" method='POST'>
-        <input type="text" placeholder="Enter Text Here" name='title'>
-        <input type="text" placeholder="Enter Text Here" name='body'>
-        <input type="submit">
-    </form>
-
-    <a href="/logout">Logout</a>
-
+    <div>
+        <div>
+            <section>
+                <h1>My Blogs</h1>
+                <ul>
+                <% blogs.forEach( el => { %>
+                        <li class='blogItem' data-id='<%=el._id%>'>
+                            <h2><%= el.title %></h2>
+                            <p><%= el.body %></p>
+                            <span><%= el.likes %></span>
+                            <span class='fa fa-trash del'></span>
+                        </li>
+                <% }) %>    
+                </ul>
+            </section>
+        </div> 
+        <div>
+         <section>
+                <h2>Create a new blog:</h2>
+                <form action="/blogs/createBlog" method='POST'>
+                    <input type="text" placeholder="Title" name='title'>
+                    <input type="text" placeholder="Body" name='body'>
+                    <input type="submit">
+                </form>
+            </section>
+        </div>
+        <div>
+            <a href="/feed">Feed</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
     <script src="js/main.js"></script>
 </body>
 </html>

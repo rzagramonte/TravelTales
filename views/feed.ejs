@@ -5,28 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NomadNotes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Feed</h1>
-    <ul>
-    <% todos.forEach( el => { %>
-            <li class='todoItem' data-id='<%=el._id%>'>
-                <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
-                <span class='del'> Delete </span>
-                <span><%= user.req.user %></span>
-            </li>
-    <% }) %>    
-    </ul>
+    <div>
+        <div>
+            <section>
+                <h1>Feed</h1>
+                <ul>
+                    <% blogs.forEach( el => { %>
+                            <li class='blogItem' data-id='<%=el._id%>'>
+                                <h2><%= el.title %></h2>
+                                <p><%= el.body %></p>
+                                <p><%= el.userName %></p>
+                                <span><%= el.likes %></span>
+                                <span class='likes fa fa-thumbs-up'></span>
+                            </li>
+                    <% }) %>    
+                    </ul>
+            </section>
+        </div>
+        <div>
+            <a href="/logout">Logout</a>
+        </div>
+        
+    </div>
 
-    <h2><%= user.userName %> has <%= left %> things left to do.</h2>
 
-    <form action="/todos/createTodo" method='POST'>
-        <input type="text" placeholder="Enter Todo Item" name='todoItem'>
-        <input type="submit">
-    </form>
-
-    <a href="/logout">Logout</a>
+    
 
     <script src="js/main.js"></script>
 </body>
