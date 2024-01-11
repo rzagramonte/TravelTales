@@ -5,6 +5,5 @@ const { ensureAuth } = require('../middleware/auth')
 
 router.get('/', ensureAuth, feedController.getAllBlogs)
 router.put('/markLike', feedController.markLike)
-router.put('/markUnlike', feedController.markUnlike)
 
 module.exports = router

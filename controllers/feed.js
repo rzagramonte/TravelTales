@@ -13,28 +13,24 @@ module.exports ={
     },
     markLike: async (req, res)=>{
         try{
-            await Blog.findOneAndUpdate({_id:req.body.blogIdFromJSFile},{
-                $set: {
-                    likes:request.body.likesS + 1
-                  }
-            });
+            const blogId = req.body.blogIdFromJSFile;
+            const userId = req.user.id;
+            const blog = await Blog.findOne({_id:blogId, likedBy: userId})
+            if (blog) {
+                console.log('User has already liked the post');
+                res.status(400).json({ error: 'User has already liked the post' });
+                return;
+            }
+            await Blog.findOneAndUpdate(
+                { _id: blogId },
+                { $push: { likedBy: userId }, $inc: { likes: 1 } },
+                { upsert: true }
+            );
             console.log('Marked Like');
             res.json('Marked Like');
         }catch(err){
             console.log(err);
         };
     },
-    markUnlike: async (req, res)=>{
-        try{
-            await Blog.findOneAndUpdate({_id:req.body.blogIdFromJSFile},{
-                $set: {
-                    likes:request.body.likesS - 1
-                  }
-            });
-            console.log('Marked Unlike');
-            res.json('Marked Unlike');
-        }catch(err){
-            console.log(err)
-        };
-    },
+
 }

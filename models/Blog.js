@@ -16,7 +16,8 @@ const BlogSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: true
-  }
+  },
+  likedBy: [{ type: String }]
 })
 
 module.exports = mongoose.model('Blog', BlogSchema)
