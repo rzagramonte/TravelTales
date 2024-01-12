@@ -17,6 +17,13 @@ module.exports ={
             const userId = req.user.id;
             const blog = await Blog.findOne({_id:blogId, likedBy: userId})
             if (blog) {
+                await Blog.findOneAndUpdate(
+                    { _id: blogId, likedBy: userId },  // Target blogs the user has liked
+                    {
+                        $pull: { likedBy: userId },  // Remove user from the 'likedBy' array
+                        $inc: { likes: -1 }          // Decrement the 'likes' count
+                    }
+                );
                 console.log('User has already liked the post');
                 res.status(400).json({ error: 'User has already liked the post' });
                 return;
