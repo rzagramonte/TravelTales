@@ -8,29 +8,30 @@ NomadNotes is a full-stack web application designed for travel enthusiasts to cr
 NomadNotes follows the Model-View-Controller (MVC) architecture, with key technologies and features including:
 
 Server (Node.js and Express.js):
-Utilizes Express.js for server setup.
-MongoDB with Mongoose as the Object Document Mapper (ODM) for efficient data storage.
-Implements Passport.js for user authentication.
-Employs EJS for server-side rendering, enhancing dynamic content presentation.
-Frontend (HTML, CSS, JavaScript):
-Leverages client-side JavaScript to facilitate actions like blog deletion and likes.
-Utilizes EJS templates for rendering dynamic content seamlessly.
+- Utilizes Express.js for server setup
+- MongoDB with Mongoose as the Object Document Mapper (ODM) for efficient data storage
+- Implements Passport.js for user authentication
+- Employs EJS for server-side rendering, enhancing dynamic content presentation
 
-## Packages/Dependencies used 
+Frontend (HTML, CSS, JavaScript):
+- Leverages client-side JavaScript to facilitate actions like blog deletion and likes
+- Utilizes EJS templates for rendering dynamic content seamlessly
+
+## Packages/Dependencies used: 
 
 bcrypt, connect-mongo, dotenv, ejs, express, express-flash, express-session, mongodb, mongoose, morgan, nodemon, passport, passport-local, validator
 
-## Install all the dependencies or node packages used for development via Terminal
+Install all the dependencies or node packages used for development via Terminal:
 
 `npm install` 
 
-## Things to add
+## Things to add:
 
 - Create a `.env` file and add the following as `key: value` 
   - PORT: 2121 (can be any port example: 3000) 
   - DB_STRING: `your database URI` 
 
-## Future Optimizations
+## Future Optimizations:
 
 1. Frontend Framework Integration:
 
