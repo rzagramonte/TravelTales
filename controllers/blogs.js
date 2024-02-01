@@ -5,7 +5,7 @@ module.exports = {
         //console.log(req); //.user
         
         try{
-            const userBlogs = await Blog.find({userId:req.user.id});
+            const userBlogs = await Blog.find({user:req.user.id});
             res.render('blogs.ejs', {blogs:userBlogs});
         }catch(err){
             console.log(err);
@@ -15,7 +15,11 @@ module.exports = {
 
     createBlog: async (req, res)=>{
         try{
-            await Blog.create({title: req.body.title, body: req.body.body, likes: 0, userId: req.user.id});
+            await Blog.create({
+                title: req.body.title, 
+                body: req.body.body, 
+                likes: 0, 
+                user: req.user.id});
             console.log('Blog has been added!');
             res.redirect('/blogs');
         }catch(err){

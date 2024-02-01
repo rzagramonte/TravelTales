@@ -16,13 +16,18 @@
                 <h1>Feed</h1>
                 <ul>
                     <% blogs.forEach( el => { %>
-                            <li class='blogItem' data-id='<%=el._id%>'>
+                      
+                            
+                        <li class='blogItem' data-id='<%=el._id%>'>
+                            <a href="blog.ejs">
                                 <h2><%= el.title %></h2>
-                                <p><%= el.body %></p>
-                                <p><%= el.userName %></p>
-                                <span><%= el.likes %></span>
-                                <span class='likes fa fa-thumbs-up'></span>
-                            </li>
+                            </a>
+                            <span><%= el.userName %></span>
+                            <span><%= el.likes %></span>
+                            <span class='likes fa fa-thumbs-up'></span>
+                        </li>
+                        
+                            
                     <% }) %>    
                     </ul>
             </section>

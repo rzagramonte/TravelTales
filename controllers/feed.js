@@ -5,7 +5,6 @@ module.exports ={
         console.log(req.user);
         try{
             const allBlogs = await Blog.find();
-            //const blogLikes = await Todo.countDocuments({userId:req.user.id,liked: true});
             res.render('feed.ejs', {blogs:allBlogs});
         }catch(err){
             console.log(err);
