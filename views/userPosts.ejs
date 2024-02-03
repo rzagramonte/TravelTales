@@ -5,8 +5,8 @@
             <section>
                 <h1>My Blogs</h1>
                 <ul>
-                <% blogs.forEach( el => { %>
-                        <li class='blogItem' data-id='<%=el._id%>'>
+                <% posts.forEach( el => { %>
+                        <li class='postItem' data-id='<%=el._id%>'>
                             <h2><%= el.title %></h2>
                             <p><%= el.body %></p>
                             <span><%= el.likes %></span>
@@ -18,8 +18,8 @@
         </div> 
         <div>
          <section>
-                <h2>Create a new blog:</h2>
-                <form action="/blogs/createBlog" method='POST'>
+                <h2>Create a new post:</h2>
+                <form action="/userPosts/createPost" method='POST'>
                     <input type="text" placeholder="Title" name='title'>
                     <textarea type="text" placeholder="Body" name='body'></textarea>
                     <input type="submit">
@@ -27,7 +27,7 @@
             </section>
         </div>
         <div>
-            <a href="/feed">Feed</a>
+            <a href="/dashboard">Feed</a>
             <a href="/logout">Logout</a>
         </div>
     </div>

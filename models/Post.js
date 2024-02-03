@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const BlogSchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -23,13 +23,13 @@ const BlogSchema = new mongoose.Schema({
   likedBy: [{ type: String }]
 })
 
-BlogSchema.pre('save', async function (next) {
+PostSchema.pre('save', async function (next) {
   try {
     // Use Mongoose's populate method to fetch the corresponding user document
-    const populatedBlog = await this.populate('user').execPopulate();
+    const populatedPost = await this.populate('user').execPopulate();
 
     // Set the userName field based on the user document
-    this.userName = populatedBlog.user.userName;
+    this.userName = populatedPost.user.userName;
 
     next();
   } catch (error) {
@@ -37,4 +37,4 @@ BlogSchema.pre('save', async function (next) {
   }
 });
 
-module.exports = mongoose.model('Blog', BlogSchema)
+module.exports = mongoose.model('Post', PostSchema)

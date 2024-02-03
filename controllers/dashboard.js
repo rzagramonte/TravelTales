@@ -1,31 +1,31 @@
-const Blog = require('../models/Blog');
+const Post = require('../models/Post');
 
 module.exports ={
-    getAllBlogs: async (req,res)=>{
+    getAllPosts: async (req,res)=>{
         console.log(req.user);
         try{
-            const allBlogs = await Blog.find();
-            res.render('feed.ejs', {blogs:allBlogs});
+            const allPosts = await Post.find();
+            res.render('dashboard.ejs', {posts:allPosts});
         }catch(err){
             console.log(err);
         };
     },
     markLike: async (req, res)=>{
         try{
-            const blogId = req.body.blogIdFromJSFile;
+            const postId = req.body.postIdFromJSFile;
             const userId = req.user.id;
-            const blog = await Blog.findOne({_id:blogId, likedBy: userId})
-            if (blog) {
-                await Blog.findOneAndUpdate(
-                    { _id: blogId, likedBy: userId },
+            const blog = await Post.findOne({_id:postId, likedBy: userId})
+            if (post) {
+                await Post.findOneAndUpdate(
+                    { _id: postId, likedBy: userId },
                     { $pull: { likedBy: userId }, $inc: { likes: -1 } }
                 );
                 console.log('User has already liked the post');
                 res.status(400).json({ error: 'User has already liked the post' });
                 return;
             }
-            await Blog.findOneAndUpdate(
-                { _id: blogId },
+            await Post.findOneAndUpdate(
+                { _id: postId },
                 { $push: { likedBy: userId }, $inc: { likes: 1 } },
                 { upsert: true }
             );
