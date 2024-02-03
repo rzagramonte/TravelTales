@@ -14,7 +14,7 @@ module.exports ={
         try{
             const postId = req.body.postIdFromJSFile;
             const userId = req.user.id;
-            const blog = await Post.findOne({_id:postId, likedBy: userId})
+            const post = await Post.findOne({_id:postId, likedBy: userId})
             if (post) {
                 await Post.findOneAndUpdate(
                     { _id: postId, likedBy: userId },
