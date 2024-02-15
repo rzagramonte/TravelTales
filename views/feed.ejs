@@ -1,0 +1,26 @@
+<%- include('partials/header') -%>
+    <div>
+        <div>
+            <section>
+                <h1>Feed</h1>
+                <ul>
+                    <% for(var i=0; i<posts.length; i++) {%>
+                        <li class='postItem' data-id='<%=posts[i]._id%>'>
+                            <a href="/post/<%= posts[i]._id%>">
+                                <h2><%= posts[i].title %></h2>
+                            </a>
+                            <span><%= posts[i].userName %></span>
+                            <span><%= posts[i].likes %></span>
+                            <span class='likes fa fa-thumbs-up'></span>
+                        </li>
+                    <% } %>    
+                    </ul>
+            </section>
+        </div>
+        <div>
+            <a href="/getProfile">My Blogs</a>
+            <a href="/logout">Logout</a>
+        </div>
+        
+    </div>
+<%- include('partials/footer') -%>

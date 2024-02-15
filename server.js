@@ -8,8 +8,7 @@ const flash = require('express-flash');
 const logger = require('morgan');
 const connectDB = require('./config/database');
 const mainRoutes = require('./routes/main');
-const postRoutes = require('./routes/userPosts');
-const dashboardRoutes = require('./routes/dashboard');
+const postsRoutes = require('./routes/posts');
 
 require('dotenv').config({path: './config/.env'});
 
@@ -41,8 +40,7 @@ app.use(passport.session())
 app.use(flash());
   
 app.use('/', mainRoutes);
-app.use('/userPosts', postRoutes);
-app.use('/dashboard', dashboardRoutes);
+app.use('/posts', postsRoutes);
  
 app.listen(process.env.PORT, ()=>{
     console.log('Server is running.');
