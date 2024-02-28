@@ -12,11 +12,13 @@ module.exports = {
     getPost: async (req,res)=>{
         try{
             const post = await Post.findById(req.params.id);
-            res.render('post.ejs', {post:post, user: req.user});
+            const comments = await Comment.findById(req.params.id);
+            res.render('post.ejs', {post:post, user: req.user, comments:comments});
         }catch(err){
             console.log(err);
         };
     },
+
     getProfile: async (req,res)=>{
         try{
             const userPosts = await Post.find({user:req.user.id});
@@ -34,20 +36,19 @@ module.exports = {
                 likes: 0, 
                 user: req.user.id});
             console.log('Post has been added!');
-            res.redirect('/userPosts');
+            res.redirect('/posts');
         }catch(err){
             console.log(err);
         };
     },
     addComment: async (req, res)=>{
         try{
-            await Post.create({
-                title: req.body.title, 
+            await Post.create({ 
                 body: req.body.body, 
                 likes: 0, 
                 user: req.user.id});
             console.log('Post has been added!');
-            res.redirect('/userPosts');
+            res.redirect('/posts');
         }catch(err){
             console.log(err);
         };

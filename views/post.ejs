@@ -7,11 +7,25 @@
             <h3><%=post.userName%></h3>
         </a>
         <p><%=post.body%></p>
+        <span><%= post.comments %></span>
         <span><%= post.likes %></span>
         
         <span class='likes fa fa-thumbs-up'></span>
         </section>
-
+        <section>
+            <a href="">Add a comment</a>
+            <ul>
+                <% comments.forEach( el => { %>
+                    <li class='comment' data-id='<%=el._id%>'>
+                        <h3><%= el.userName %></h3>
+                        <p><%= el.body %></p>
+                        <span><%= el.likes %></span>
+                        <span class='likes fa fa-thumbs-up'></span>
+                        <span class='reply'></span>
+                    </li>
+                    <% }) %> 
+             </ul>
+        </section>
     </div>
 
 <%- include('partials/footer') -%>

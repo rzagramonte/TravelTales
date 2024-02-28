@@ -9,6 +9,10 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  comments: {
+    type: Number,
+    required: true,
+  },
   likes: {
     type: Number,
     required: true,
@@ -20,7 +24,11 @@ const PostSchema = new mongoose.Schema({
   userName: {
     type: String,  // This field will store the userName
   },
-  likedBy: [{ type: String }]
+  likedBy: [{ type: String }],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 })
 
 PostSchema.pre('save', async function (next) {
