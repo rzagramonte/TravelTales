@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const CommentSchema = new mongoose.Schema({
+  post: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Post",
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -23,18 +27,17 @@ const CommentSchema = new mongoose.Schema({
   },
 })
 
-PostSchema.pre('save', async function (next) {
-    try {
-      // Use Mongoose's populate method to fetch the corresponding user document
-      const populatedPost = await this.populate('user').execPopulate();
-  
-      // Set the userName field based on the user document
-      this.userName = populatedPost.user.userName;
-  
-      next();
-    } catch (error) {
-      next(error);
-    }
-  });
+CommentSchema.pre('save', async function (next) {
+  try {
+    // Use Mongoose's populate method to fetch the corresponding user document
+    const populatedUser = await this.populate('user').execPopulate();
+    // Set the userName field based on the user document
+    this.userName = populatedUser.user.userName;
 
-module.exports = mongoose.model('Comments', CommentSchema)
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+module.exports = mongoose.model('Comment', CommentSchema)

@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 
 module.exports = {
     getFeed: async (req,res)=>{
@@ -12,8 +13,9 @@ module.exports = {
     getPost: async (req,res)=>{
         try{
             const post = await Post.findById(req.params.id);
-            const comments = await Comment.findById(req.params.id);
-            res.render('post.ejs', {post:post, user: req.user, comments:comments});
+            //const comments = await Comment.findById(req.params.id);
+            res.render('post.ejs', {post:post, user: req.user, comments: post.comments});
+            console.log(req)
         }catch(err){
             console.log(err);
         };
@@ -43,14 +45,16 @@ module.exports = {
     },
     addComment: async (req, res)=>{
         try{
-            await Post.create({ 
+            await Comment.create({ 
+                post: req.params.id,
                 body: req.body.body, 
                 likes: 0, 
                 user: req.user.id});
             console.log('Post has been added!');
-            res.redirect('/posts');
+            res.redirect(`/post/${req.params.id}`);
         }catch(err){
             console.log(err);
+            //console.log(req);
         };
     },
     markLike: async (req, res)=>{

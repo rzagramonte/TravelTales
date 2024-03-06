@@ -1,9 +1,9 @@
 <%- include('partials/header') -%>
 
     <div>
-        <section>
+        <section class='postItem' data-id='<%=post._id%>'>
         <h1><%=post.title%></h1>
-        <a href="userprofile">
+        <a href="/profile">
             <h3><%=post.userName%></h3>
         </a>
         <p><%=post.body%></p>
@@ -13,18 +13,30 @@
         <span class='likes fa fa-thumbs-up'></span>
         </section>
         <section>
-            <a href="">Add a comment</a>
-            <ul>
-                <% comments.forEach( el => { %>
-                    <li class='comment' data-id='<%=el._id%>'>
-                        <h3><%= el.userName %></h3>
-                        <p><%= el.body %></p>
-                        <span><%= el.likes %></span>
-                        <span class='likes fa fa-thumbs-up'></span>
-                        <span class='reply'></span>
-                    </li>
+            
+            <section>
+                <a href=""></a>
+                <h2>Add a comment:</h2>
+                <form action="/posts/addComment" method='POST'>
+                    <textarea type="text" placeholder="Comment" name='body'></textarea>
+                    <input type="submit">
+                </form>
+            </section>
+            <% if(!comments.length){ %>
+                <p>No comments</p>
+            <% } else { %> 
+                <ul>
+                    <% comments.forEach( el => { %>
+                        <li class='comment' data-id='<%=el._id%>'>
+                            <h3><%= el.userName %></h3>
+                            <p><%= el.body %></p>
+                            <span><%= el.likes %></span>
+                            <span class='likes fa fa-thumbs-up'></span>
+                            <span class='reply'></span>
+                        </li>
                     <% }) %> 
-             </ul>
+                 </ul>
+            <% } %>
         </section>
     </div>
 
