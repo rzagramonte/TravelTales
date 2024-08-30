@@ -51,7 +51,7 @@ module.exports = {
                 likes: 0, 
                 user: req.user.id});
             console.log('Post has been added!');
-            res.redirect(`/post/${req.params.id}`);
+            res.redirect(`/posts/${req.params.id}`);
         }catch(err){
             console.log(err);
             //console.log(req);

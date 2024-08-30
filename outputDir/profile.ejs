@@ -1,0 +1,39 @@
+<html><head><link rel="apple-touch-icon" sizes="x" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff"></head><body>&lt;%- include('partials/header') -%&gt;
+    <div>
+        <div>
+            <section>
+                <h1>My Blogs</h1>
+                <ul>
+                &lt;% posts.forEach( el =&gt; { %&gt;
+                        <li class="postItem" data-id="<%=el._id%>">
+                            <h2>&lt;%= el.title %&gt;</h2>
+                            <p>&lt;%= el.body %&gt;</p>
+                            <span>&lt;%= el.likes %&gt;</span>
+                            <span class="fa fa-trash del"></span>
+                        </li>
+                &lt;% }) %&gt;    
+                </ul>
+            </section>
+        </div> 
+        <div>
+         <section>
+                <h2>Create a new post:</h2>
+                <form action="/posts/createPost" method="POST">
+                    <input type="text" placeholder="Title" name="title">
+                    <textarea type="text" placeholder="Body" name="body"></textarea>
+                    <input type="submit">
+                </form>
+            </section>
+        </div>
+        <div>
+            <a href="/feed">Feed</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+&lt;%- include('partials/footer') -%&gt;</body></html>

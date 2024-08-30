@@ -1,0 +1,45 @@
+<html><head><link rel="apple-touch-icon" sizes="x" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff"></head><body>&lt;%- include('partials/header') -%&gt;
+    <div>
+        <section class="postItem" data-id="<%=post._id%>">
+        <h1>&lt;%=post.title%&gt;</h1>
+        <a href="/profile">
+            <h3>&lt;%=post.userName%&gt;</h3>
+        </a>
+        <p>&lt;%=post.body%&gt;</p>
+        <span>&lt;%= post.comments %&gt;</span>
+        <span>&lt;%= post.likes %&gt;</span>
+        <span class="likes fa fa-thumbs-up"></span>
+        </section>
+        <section>
+            <section>
+                <a href=""></a>
+                <h2>Add a comment:</h2>
+                <form action="/posts/addComment" method="POST">
+                    <textarea type="text" placeholder="Comment" name="body"></textarea>
+                    <input type="submit">
+                </form>
+            </section>
+            &lt;% if(!comments.length){ %&gt;
+                <p>No comments</p>
+            &lt;% } else { %&gt; 
+                <ul>
+                    &lt;% comments.forEach( el =&gt; { %&gt;
+                        <li class="comment" data-id="<%=el._id%>">
+                            <h3>&lt;%= el.userName %&gt;</h3>
+                            <p>&lt;%= el.body %&gt;</p>
+                            <span>&lt;%= el.likes %&gt;</span>
+                            <span class="likes fa fa-thumbs-up"></span>
+                            <span class="reply"></span>
+                        </li>
+                    &lt;% }) %&gt; 
+                 </ul>
+            &lt;% } %&gt;
+        </section>
+    </div>
+&lt;%- include('partials/footer') -%&gt;</body></html>

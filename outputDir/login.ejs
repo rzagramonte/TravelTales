@@ -1,0 +1,23 @@
+<html><head><link rel="apple-touch-icon" sizes="x" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff"></head><body>&lt;%- include('partials/header') -%&gt;
+    &lt;% if (locals.messages.errors) { %&gt;
+        &lt;% messages.errors.forEach( el =&gt; { %&gt;
+            <div class="alert alert-danger">&lt;%= el.msg %&gt;</div>
+        &lt;% }) %&gt;    
+    &lt;% } %&gt;
+    &lt;% if (locals.messages.info) { %&gt;
+        &lt;% messages.info.forEach( el =&gt; { %&gt;
+            <div class="alert alert-danger">&lt;%= el.msg %&gt;</div>
+        &lt;% }) %&gt;    
+    &lt;% } %&gt;
+    <form action="/login" method="POST">
+        <input type="email" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit">
+    </form>
+    &lt;%- include('partials/footer') -%&gt;</body></html>
