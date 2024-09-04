@@ -74,7 +74,7 @@ module.exports = {
             if (tale.user != req.user.id) {
               res.redirect('/tales')
             } else {
-              story = await Tale.findOneAndUpdate({ _id: req.params.id }, req.body, {
+              tale = await Tale.findOneAndUpdate({ _id: req.params.id }, req.body, {
                 new: true,
                 runValidators: true,
               })
